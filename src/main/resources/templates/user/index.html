@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Пользователь</title>
+</head>
+
+<body>
+<h1>User, welcome spring boot security page!</h1>
+<h2>Your parameters in the table below:</h2>
+<table border="1">
+    <tr>
+        <th>Username</th>
+        <th>Role</th>
+    </tr>
+    <tr>
+        <td><th:block th:text="${user.getUsername()}"></th:block></td>
+        <td th:each="role : ${user.roles}"><p th:text="${#strings.replace(role.name, 'ROLE_', '')}"></p></td>
+    </tr>
+</table>
+<th:block><a th:href="@{/logout}">Exit</a></th:block>
+</body>
+</html>

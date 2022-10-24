@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>Новый пользователь</title>
+</head>
+<body>
+<h1>Новый пользователь:</h1>
+<form th:method="POST" th:action="@{add}" th:object="${person}">
+    <label for="person.username">Логин:</label>
+    <input type="text" th:field="${person.username}" id="person.username">
+    <br/>
+    <label for="person.password">Пароль:</label>
+    <input type="text" th:field="${person.password}" id="person.password">
+    <br/>
+
+    <label for="roles">Роли:</label>
+    <select th:name="roleName", size="2" required id="roles">
+        <option th:each="role : ${roles}"
+            th:value="${role.name}"
+            th:utext="${#strings.replace(role.name, 'ROLE_', '')}"></option>
+    </select>
+
+    <br/>
+    <input type="submit" value="Создать">
+</form>
+<br/> <th:block><a th:href="@{/logout}">Exit</a></th:block>
+
+</body>
+</html>

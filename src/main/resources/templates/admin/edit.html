@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование пользователя</title>
+</head>
+<body>
+
+<h1>Редактирование пользователя:</h1>
+
+<form th:method="POST" th:action="@{update/{id}(id=${user.id})}" th:object="${user}" >
+    <label for="username">Логин:</label>
+    <input type="text" th:name="username" th:value="${user.username}" id="username">
+    <label for="password">Пароль:</label>
+    <input type="password" th:name="password" th:value="${user.password}" id="password">
+    <label for="roles">Роли:</label>
+    <select th:name="roleName", size="2" required id="roles">
+        <option th:each="role : ${roles}"
+                th:value="${role.name}"
+                th:utext="${#strings.replace(role.name, 'ROLE_', '')}"></option>
+    </select>
+    <input type="submit" value="Обновить">
+</form>
+<br/> <th:block><a th:href="@{/logout}">Exit</a></th:block>
+</body>
+</html>

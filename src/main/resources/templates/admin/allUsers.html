@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Пользователи</title>
+</head>
+<body>
+
+<div>
+    <h1>Все пользователи:</h1>
+    <table class="table" border="1">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">username</th>
+            <th scope="col">password</th>
+            <th scope="col">roles</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="person: ${users}">
+            <td>
+                <a th:text="${person.getId()}"></a>
+            </td>
+            <td>
+                <a th:text="${person.getUsername()}"></a>
+            </td>
+            <td>
+                <a th:text="${person.getPassword}"></a>
+            </td>
+            <td>
+                <a th:each="userRole : ${person.roles}" th:text="${#strings.replace(userRole.name, 'ROLE_', '')}"></a>
+            </td>
+            <td>
+               <a th:href="@{/admin/delete(id=${person.getId()})}">Удалить</a></th:block>
+            </td>
+            <td>
+               <a th:href="@{/admin/edit(id=${person.getId()})}" >Изменить</a></th:block>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<br/>
+<hr/>
+
+<a href="new">Новый пользователь</a>
+<br/> <th:block><a th:href="@{/logout}">Exit</a></th:block>
+</body>
+</html>
