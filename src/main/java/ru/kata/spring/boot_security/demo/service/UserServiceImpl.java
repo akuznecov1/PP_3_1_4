@@ -1,14 +1,13 @@
 package ru.kata.spring.boot_security.demo.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import ru.kata.spring.boot_security.demo.dao.RoleDAO;
+
 import ru.kata.spring.boot_security.demo.dao.UserDAO;
 import ru.kata.spring.boot_security.demo.models.Role;
 import ru.kata.spring.boot_security.demo.models.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.Table;
+
 import java.util.List;
 import java.util.Set;
 
@@ -60,7 +59,12 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User getByName(String userName) {
-        return userDAO.getByName(userName);
+    public User getByEmail(String email) {
+        return userDAO.getByEmail(email);
+    }
+
+    @Override
+    public User findByName(String userName) {
+        return userDAO.findByName(userName);
     }
 }

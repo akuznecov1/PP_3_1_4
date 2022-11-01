@@ -15,5 +15,7 @@ public interface UserService {
     User getById(long id);
     void addRole(long userID, Role role);
     Set<Role> getRoles(long userID);
-    User getByName(String userName);
+    User getByEmail(String email);
+    User findByName(String userName);
+
 }
