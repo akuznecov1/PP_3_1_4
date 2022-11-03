@@ -4,6 +4,8 @@ package ru.kata.spring.boot_security.demo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.models.Role;
@@ -14,8 +16,10 @@ import ru.kata.spring.boot_security.demo.service.UserService;
 @Component
 public class InitDB implements ApplicationRunner {
 
+
     private UserService userService;
     private RoleService roleService;
+
 
     @Autowired
     public void DataLoader(UserService userService, RoleService roleService) {
@@ -36,6 +40,8 @@ public class InitDB implements ApplicationRunner {
         user.setFirstName("User");
         user.setLastName("User");
         user.setPassword("user");
+
+
         user.addRole(roleUser);
         userService.add(user);
 
@@ -49,7 +55,25 @@ public class InitDB implements ApplicationRunner {
         admin.setFirstName("Admin");
         admin.setLastName("Admin");
         admin.setPassword("admin");
+
         admin.addRole(roleAdmin);
         userService.add(admin);
+
+        Role testRole = new Role();
+        testRole.setName("ALL_ROLE");
+        roleService.add(roleAdmin);
+        roleService.add(roleUser);
+
+        User allRole = new User();
+        allRole.setAge(30);
+        allRole.setEmail("all@mail.ru");
+        allRole.setFirstName("User");
+        allRole.setLastName("Admin");
+        allRole.setPassword("pudge");
+
+        allRole.addRole(roleAdmin);
+        allRole.addRole(roleUser);
+        userService.add(allRole);
+
     }
 }

@@ -173,14 +173,17 @@
                                                                                        th:value="${userUp.password}"/>
                                                                             </div>
 
-                                                                            <div class="form-group text-center font-weight-bold">
+                                                                            <div multiple class="form-group text-center font-weight-bold">
                                                                                 <label>Role</label>
                                                                                 <select class="form-control form-control-sm"
                                                                                         th:name="roleName"
+                                                                                        multiple="multiple"
                                                                                         size="2">
                                                                                     <option th:each="role : ${roles}"
                                                                                             th:value="${role.name}"
-                                                                                            th:utext="${#strings.replace(role.name, 'ROLE_', '')}"></option>
+                                                                                            th:utext="${#strings.replace(role.name, 'ROLE_', '')}"
+                                                                                            th:selected="${userUp.roles.contains(role)}">
+                                                                                    </option>
                                                                                 </select>
                                                                             </div>
                                                                         </form>
@@ -281,7 +284,10 @@
                                                                                 <label>Role</label>
                                                                                 <select class="form-control form-control-sm"
                                                                                         th:name="roleName"
-                                                                                        size="2" readonly="readonly">
+                                                                                        size="2"
+                                                                                        readonly="readonly"
+                                                                                        multiple="multiple"
+                                                                                >
                                                                                     <option th:each="role : ${roles}"
                                                                                             th:value="${role.name}"
                                                                                             th:utext="${#strings.replace(role.name, 'ROLE_', '')}"></option>
@@ -358,10 +364,12 @@
                                             <div class="form-group text-center font-weight-bold">
                                                 <label>Role</label>
                                                 <select class="form-control form-control-sm" th:name="roleName"
+                                                        multiple="multiple"
                                                         size="2">
                                                     <option th:each="role : ${roles}"
                                                             th:value="${role.name}"
-                                                            th:utext="${#strings.replace(role.name, 'ROLE_', '')}"></option>
+                                                            th:utext="${#strings.replace(role.name, 'ROLE_', '')}">
+                                                    </option>
                                                 </select>
                                             </div>
                                             <div class="modal-body col-md text-center">
